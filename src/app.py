@@ -47,7 +47,7 @@ def post_member():
         return jsonify({'msg': 'El campo lucky_numbers es obligatorio'})
     #para crear un nuevo miembro:
     new_member = {
-        'id': jackson_family._generateId(),
+        'id': body['id'],
         'first_name': body['first_name'],
         'last_name': jackson_family.last_name,
         'age': body['age'],
@@ -67,9 +67,9 @@ def delete_a_member(id):
     member = jackson_family.get_member(id)
     if member:
         jackson_family.delete_member(id)
-        return jsonify({'msg': 'Se eliminó el miembro con el id proporcionado'}), 200
+        return jsonify({'done': True}), 200
     else:
-        return jsonify({'msg': 'No existe miembro con el id proporcionado'}), 400
+        return jsonify({'done': 'False'}), 404
 
 
 # this only runs if `$ python src/app.py` is executed
